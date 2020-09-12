@@ -83,8 +83,14 @@ public class AnnotatedBeanDefinitionReader {
 	public AnnotatedBeanDefinitionReader(BeanDefinitionRegistry registry, Environment environment) {
 		Assert.notNull(registry, "BeanDefinitionRegistry must not be null");
 		Assert.notNull(environment, "Environment must not be null");
+		/**
+		 * 1. 获取注解BD读取器，在方法内部是创建一个读取器，
+		 * 设置BeanDefinitionRegistry(这里用的是beanFactory,因为DefaultListableBeanFactory实现了BeanDefinitionRegistry接口),
+		 */
 		this.registry = registry;
+		// 2. 创建并设置条件评估器ConditionEvaluator(它用于对@Conditional注解对应的配置的检测), 这里对于 ConditionEvaluator的功能待补充 // TODO
 		this.conditionEvaluator = new ConditionEvaluator(registry, environment, null);
+		// 3. 注册基于注解的BeanDefinition的后置处理器，该方法也非常丰富，具体注册了哪些BD需要进入方法内部去解读
 		AnnotationConfigUtils.registerAnnotationConfigProcessors(this.registry);
 	}
 

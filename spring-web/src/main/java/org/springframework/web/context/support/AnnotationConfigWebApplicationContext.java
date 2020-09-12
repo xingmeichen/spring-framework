@@ -196,6 +196,13 @@ public class AnnotationConfigWebApplicationContext extends AbstractRefreshableWe
 	 */
 	@Override
 	protected void loadBeanDefinitions(DefaultListableBeanFactory beanFactory) {
+		/**
+		 * 1. 获取基于注解的BeanDefinitions读取器，
+		 * 在方法内部是创建一个读取器，
+		 * 1)设置BeanDefinitionRegistry(这里用的是beanFactory,因为DefaultListableBeanFactory实现了BeanDefinitionRegistry接口),
+		 * 2)创建并设置条件评估器ConditionEvaluator(它用于对@Conditional注解对应的配置的检测)
+		 * 3)注册基于注解的BeanDefinition的后置处理器，该方法也非常丰富，具体注册了哪些BeanDifinition
+		 * */
 		AnnotatedBeanDefinitionReader reader = getAnnotatedBeanDefinitionReader(beanFactory);
 		ClassPathBeanDefinitionScanner scanner = getClassPathBeanDefinitionScanner(beanFactory);
 

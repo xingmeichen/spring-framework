@@ -63,7 +63,7 @@ public abstract class TransactionManagementConfigUtils {
 	public static final String JTA_TRANSACTION_ASPECT_CLASS_NAME =
 			"org.springframework.transaction.aspectj.JtaAnnotationTransactionAspect";
 
-	/**
+	/**f
 	 * The name of the AspectJ transaction management @{@code Configuration} class for JTA.
 	 * @since 5.1
 	 */
