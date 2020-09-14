@@ -634,7 +634,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * @see #getBeanFactory()
 	 */
 	protected ConfigurableListableBeanFactory obtainFreshBeanFactory() {
-		// 刷新BeanFactory {sDeep} // 之后看到这个标记表明方法体内有需要更多挖掘的内容
+		// 刷新BeanFactory {Deep} // 之后看到这个标记表明方法体内有需要更多挖掘的内容
 		refreshBeanFactory();
 		// 获取BeanFactory
 		return getBeanFactory();

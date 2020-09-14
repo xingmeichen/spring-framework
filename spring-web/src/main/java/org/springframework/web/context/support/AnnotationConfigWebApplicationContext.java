@@ -197,7 +197,7 @@ public class AnnotationConfigWebApplicationContext extends AbstractRefreshableWe
 	@Override
 	protected void loadBeanDefinitions(DefaultListableBeanFactory beanFactory) {
 		/**
-		 * 1. 获取基于注解的BeanDefinitions读取器，
+		 * 1. 获取基于注解的BeanDefinition读取器，
 		 * 在方法内部是创建一个读取器，
 		 * 1)设置BeanDefinitionRegistry(这里用的是beanFactory,因为DefaultListableBeanFactory实现了BeanDefinitionRegistry接口),
 		 * 2)创建并设置条件评估器ConditionEvaluator(它用于对@Conditional注解对应的配置的检测)
@@ -224,6 +224,7 @@ public class AnnotationConfigWebApplicationContext extends AbstractRefreshableWe
 				logger.debug("Registering component classes: [" +
 						StringUtils.collectionToCommaDelimitedString(this.componentClasses) + "]");
 			}
+			// {Deep} 注册指定的类的BeanDefinition
 			reader.register(ClassUtils.toClassArray(this.componentClasses));
 		}
 
@@ -232,6 +233,11 @@ public class AnnotationConfigWebApplicationContext extends AbstractRefreshableWe
 				logger.debug("Scanning base packages: [" +
 						StringUtils.collectionToCommaDelimitedString(this.basePackages) + "]");
 			}
+			/**
+			 * {Deep} 通过扫描的方式注册指定包下的BeanDefinition，
+			 * 这种方式注册的类一定是被配置到xml文件的bean节点中
+			 * 或者被标注了特定注解的类才会扫描到，例如被 {@link @Configuration}, {@link @Component}以及其派生注解注解的类
+			 */
 			scanner.scan(StringUtils.toStringArray(this.basePackages));
 		}
 
